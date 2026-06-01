@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>115學年度 實習醫學生職前訓練 — 評量問卷</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0e2f4f;
+  --navy-2:#16466e;
+  --teal:#157089;
+  --teal-2:#1b8aa6;
+  --teal-soft:#e6f1f5;
+  --teal-line:#cfe2ea;
+  --ink:#1d2b36;
+  --muted:#5d6f7c;
+  --paper:#f4f7f9;
+  --card:#ffffff;
+  --gold:#c79a3e;
+  --good:#1f9d6b;
+  --warn:#c45a3b;
+  --shadow:0 6px 22px rgba(14,47,79,.10);
+  --radius:16px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"Noto Sans TC",system-ui,sans-serif; line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(circle at 12% -5%, #e9f3f7 0%, rgba(244,247,249,0) 38%),
+                   radial-gradient(circle at 92% 0%, #eaf1f6 0%, rgba(244,247,249,0) 42%);
+}
+.wrap{max-width:860px;margin:0 auto;padding:0 18px 80px;}
+
+/* ===== Header ===== */
+header.hero{
+  background:linear-gradient(135deg,var(--navy) 0%, var(--navy-2) 55%, var(--teal) 130%);
+  color:#fff; padding:34px 0 30px; position:relative; overflow:hidden;
+  border-bottom:4px solid var(--gold);
+}
+header.hero::after{
+  content:""; position:absolute; right:-60px; top:-60px; width:280px; height:280px;
+  background:radial-gradient(circle, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 70%);
+}
+.hero-inner{max-width:860px;margin:0 auto;padding:0 18px;position:relative;}
+.eyebrow{font-size:.86rem;letter-spacing:.18em;color:#9ec7d6;font-weight:700;margin-bottom:6px;}
+.hero h1{
+  font-family:"Noto Serif TC",serif; font-weight:900; font-size:1.9rem; margin:0 0 4px;
+  letter-spacing:.02em; line-height:1.25;
+}
+.hero .sub{color:#cfe3ec;font-size:.98rem;}
+.hero .meta{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:16px;font-size:.9rem;color:#dcecf2;}
+.hero .meta b{color:#fff;font-weight:500;}
+
+/* ===== Mode switch ===== */
+.modebar{position:sticky;top:0;z-index:30;background:rgba(244,247,249,.86);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--teal-line);padding:10px 0;}
+.modebar-inner{max-width:860px;margin:0 auto;padding:0 18px;display:flex;gap:8px;}
+.modebtn{
+  flex:1;border:1.5px solid var(--teal-line);background:#fff;color:var(--muted);
+  padding:11px 6px;border-radius:12px;font-family:inherit;font-weight:700;font-size:.95rem;cursor:pointer;
+  transition:all .18s ease; text-align:center; line-height:1.3;
+}
+.modebtn small{display:block;font-weight:400;font-size:.72rem;color:#9aa9b3;margin-top:1px;}
+.modebtn:hover{border-color:var(--teal-2);color:var(--teal);}
+.modebtn.active{background:var(--teal);border-color:var(--teal);color:#fff;box-shadow:var(--shadow);}
+.modebtn.active small{color:#cfeaf1;}
+
+/* ===== Sections / cards ===== */
+.intro{background:var(--teal-soft);border:1px solid var(--teal-line);border-radius:var(--radius);
+  padding:16px 18px;margin:22px 0;color:#234a5b;font-size:.92rem;}
+.intro b{color:var(--navy);}
+.section{background:var(--card);border:1px solid #e7eef2;border-radius:var(--radius);
+  padding:22px 22px 8px;margin:18px 0;box-shadow:var(--shadow);}
+.section-head{display:flex;align-items:center;gap:10px;margin:-2px 0 14px;}
+.section-head .dot{width:10px;height:26px;border-radius:6px;background:var(--teal);flex:none;}
+.section-head h2{font-family:"Noto Serif TC",serif;font-size:1.18rem;margin:0;color:var(--navy);font-weight:700;}
+.section-note{font-size:.82rem;color:var(--muted);margin:-6px 0 16px;}
+
+/* basic fields */
+.field{margin-bottom:16px;}
+.field label.q{display:block;font-weight:500;margin-bottom:7px;color:var(--ink);}
+.field .hint{font-size:.78rem;color:var(--muted);font-weight:400;}
+.field input[type=text], .field select, .field textarea{
+  width:100%;border:1.5px solid #d6e1e7;border-radius:10px;padding:10px 12px;font-family:inherit;
+  font-size:.95rem;color:var(--ink);background:#fbfdfe;transition:border .15s;
+}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--teal-2);background:#fff;}
+.field textarea{min-height:76px;resize:vertical;}
+.req{color:var(--warn);}
+
+/* MCQ */
+.qcard{padding:15px 0;border-top:1px dashed #e1eaef;}
+.qcard:first-of-type{border-top:none;}
+.qtag{display:inline-block;font-size:.7rem;font-weight:700;color:var(--teal);background:var(--teal-soft);
+  border:1px solid var(--teal-line);padding:2px 9px;border-radius:20px;margin-bottom:7px;letter-spacing:.04em;}
+.qtext{font-weight:500;margin:0 0 10px;}
+.qtext .num{color:var(--teal);font-weight:700;margin-right:4px;}
+.opt{display:flex;align-items:flex-start;gap:10px;padding:9px 12px;border:1.5px solid #e0e9ee;border-radius:10px;
+  margin-bottom:7px;cursor:pointer;transition:all .14s;background:#fff;}
+.opt:hover{border-color:var(--teal-2);background:#f7fbfc;}
+.opt input{margin-top:5px;accent-color:var(--teal);flex:none;width:16px;height:16px;}
+.opt.checked{border-color:var(--teal);background:var(--teal-soft);}
+.opt .lab{font-size:.93rem;}
+
+/* Likert scale */
+.likert{padding:13px 0;border-top:1px dashed #e1eaef;}
+.likert:first-of-type{border-top:none;}
+.likert .ltext{font-weight:500;margin-bottom:9px;}
+.likert .ltext .lec{display:block;font-size:.78rem;color:var(--muted);font-weight:400;margin-top:2px;}
+.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;}
+.scale label{position:relative;cursor:pointer;}
+.scale input{position:absolute;opacity:0;}
+.scale .pill{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  border:1.5px solid #e0e9ee;border-radius:10px;padding:9px 2px;text-align:center;transition:all .14s;background:#fff;min-height:58px;}
+.scale .pill .v{font-weight:700;color:var(--muted);font-size:1.05rem;}
+.scale .pill .t{font-size:.72rem;color:var(--muted);line-height:1.2;}
+.scale label:hover .pill{border-color:var(--teal-2);}
+.scale input:checked + .pill{background:var(--teal);border-color:var(--teal);}
+.scale input:checked + .pill .v,.scale input:checked + .pill .t{color:#fff;}
+.scale-legend{display:flex;justify-content:space-between;font-size:.72rem;color:#9aa9b3;margin-top:4px;}
+
+/* satisfaction session block */
+.sess{border:1px solid #e7eef2;border-radius:12px;padding:14px 15px;margin-bottom:14px;background:#fbfdfe;}
+.sess h3{margin:0 0 2px;font-size:1rem;color:var(--navy);font-weight:700;}
+.sess .lect{font-size:.8rem;color:var(--muted);margin-bottom:10px;}
+.sess .twoscale .likert{border-top:none;padding:8px 0;}
+.sess .twoscale .ltext{font-size:.9rem;}
+
+/* result + buttons */
+.actionbar{position:sticky;bottom:0;background:linear-gradient(0deg,var(--paper) 70%,rgba(244,247,249,0));
+  padding:16px 0 6px;margin-top:8px;}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:none;border-radius:12px;
+  padding:13px 20px;font-family:inherit;font-weight:700;font-size:1rem;cursor:pointer;transition:all .16s;}
+.btn-primary{background:var(--teal);color:#fff;width:100%;box-shadow:var(--shadow);}
+.btn-primary:hover{background:var(--navy);}
+.btn-row{display:flex;gap:10px;margin-top:10px;}
+.btn-ghost{flex:1;background:#fff;border:1.5px solid var(--teal-line);color:var(--teal);}
+.btn-ghost:hover{border-color:var(--teal);background:var(--teal-soft);}
+
+.result{display:none;background:#fff;border:1px solid #e7eef2;border-radius:var(--radius);padding:22px;
+  margin:18px 0;box-shadow:var(--shadow);text-align:center;}
+.result.show{display:block;animation:fade .4s ease;}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.score-ring{font-family:"Noto Serif TC",serif;font-size:2.6rem;font-weight:900;color:var(--teal);}
+.score-ring small{font-size:1rem;color:var(--muted);font-weight:400;}
+.review{text-align:left;margin-top:14px;font-size:.88rem;}
+.review .ri{padding:8px 10px;border-radius:8px;margin-bottom:5px;display:flex;gap:8px;align-items:flex-start;}
+.review .ok{background:#eaf7f1;color:#136844;}
+.review .ng{background:#fdeee9;color:#9c3a1f;}
+.review .mark{font-weight:700;flex:none;}
+
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);
+  background:var(--navy);color:#fff;padding:12px 22px;border-radius:30px;font-size:.9rem;font-weight:500;
+  opacity:0;transition:all .3s;z-index:60;box-shadow:0 8px 24px rgba(0,0,0,.25);pointer-events:none;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+.err{border-color:var(--warn)!important;}
+.errmsg{color:var(--warn);font-size:.84rem;margin-top:6px;display:none;}
+
+.partbar{display:flex;align-items:center;gap:12px;margin:26px 0 4px;padding:14px 18px;border-radius:14px;
+  background:linear-gradient(135deg,var(--navy),var(--teal));color:#fff;box-shadow:var(--shadow);}
+.partbar .ptag{font-size:.74rem;font-weight:700;letter-spacing:.08em;background:rgba(255,255,255,.18);
+  padding:4px 11px;border-radius:20px;flex:none;}
+.partbar .ptitle{font-family:"Noto Serif TC",serif;font-weight:700;font-size:1.05rem;}
+
+footer{text-align:center;color:#9aa9b3;font-size:.8rem;margin-top:30px;line-height:1.8;}
+footer b{color:var(--muted);}
+
+@media(max-width:560px){
+  .hero h1{font-size:1.5rem;}
+  .scale .pill .t{font-size:.62rem;}
+  .scale .pill{padding:8px 1px;min-height:62px;}
+  .modebtn{font-size:.84rem;padding:9px 3px;}
+  .modebtn small{font-size:.66rem;}
+  .section{padding:18px 15px 6px;}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">CHI MEI MEDICAL CENTER · 教學部</div>
+    <h1>實習醫學生職前訓練 · 課後問卷</h1>
+    <div class="sub">115學年度 UGY 職前訓練 — 課後測驗與滿意度問卷</div>
+    <div class="meta">
+      <span>📅 <b>115/06/01（一）</b></span>
+      <span>📍 <b>教學大樓 B1 教-2 會議室</b></span>
+      <span>👥 <b>中山醫25 · 成大2 · 國防2</b></span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="intro" id="introBox"></div>
+
+  <!-- 基本資料 (共用) -->
+  <div class="section" id="baseBox">
+    <div class="section-head"><span class="dot"></span><h2>基本資料</h2></div>
+    <div class="field">
+      <label class="q">就讀學校 <span class="req">*</span></label>
+      <select id="school">
+        <option value="">— 請選擇 —</option>
+        <option>中山醫學大學</option>
+        <option>成功大學</option>
+        <option>國防醫學大學</option>
+      </select>
+      <div class="errmsg" data-for="school">請選擇就讀學校</div>
+    </div>
+    <div class="field">
+      <label class="q">匿名代碼 <span class="req">*</span>
+        <span class="hint">（建議：出生月日4碼，例：0815。僅作為匿名識別之用，本問卷不記名、不影響個人成績。）</span>
+      </label>
+      <input type="text" id="pairing" maxlength="8" placeholder="例：0815" inputmode="numeric">
+      <div class="errmsg" data-for="pairing">請填寫匿名代碼</div>
+    </div>
+  </div>
+
+  <!-- 動態內容掛載點 -->
+  <div id="dynamic"></div>
+
+  <!-- 結果 -->
+  <div class="result" id="resultBox"></div>
+
+  <!-- 操作列 -->
+  <div class="actionbar">
+    <button class="btn btn-primary" id="submitBtn">送出課後測驗與滿意度問卷</button>
+    <div class="btn-row">
+      <button class="btn btn-ghost" id="csvBtn">下載本筆資料（CSV）</button>
+      <button class="btn btn-ghost" id="copyBtn">複製為表格列（貼到 Google 試算表）</button>
+    </div>
+  </div>
+
+  <footer>
+    主辦單位：奇美醫院 教學部　|　聯絡人：許淑怡 教學行政管理員（分機 57435）<br>
+    <b>分析提示：</b>本問卷為訓練後評量，可分析各題答對率與知識平均分、信心自評各項平均，以及各堂課滿意度排序。
+  </footer>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ====================== 設定 ====================== */
+// ▼▼ 部署 Apps Script 後，把結尾為 /exec 的網址貼在這裡（兩邊保留引號）▼▼
+const SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbwgwKYCsMS_smOEfyDlQwkSLJ88pZbSS4qf1qsIaAuwJIEHWnJwHjYqIh09GHNcbiwH3g/exec";
+// ▲▲ 留空則只做本機計分與 CSV 下載，不會送到 Google 試算表 ▲▲
+
+/* ====================== 題庫資料 ====================== */
+
+// 知識測驗（課後測驗，answer 為正確選項索引）
+const KNOWLEDGE = [
+  {id:"K1", course:"感染管制", q:"下列何者「不是」WHO 建議的手部衛生五個時機之一？",
+   options:["接觸病人前","執行清潔／無菌操作技術前","與同事交班報告前","接觸病人周遭環境後"], answer:2},
+  {id:"K2", course:"隔離防護", q:"照護疑似／確診肺結核（空氣傳染）病人時，應配戴下列何種口罩？",
+   options:["一般外科口罩","N95（含以上）口罩","棉布口罩","不需配戴口罩"], answer:1},
+  {id:"K3", course:"病歷寫作", q:"病歷 SOAP 格式中的「O」代表下列何者？",
+   options:["主觀資料（病人主訴）","客觀資料（檢查、檢驗、理學發現）","評估與診斷","處置與計畫"], answer:1},
+  {id:"K4", course:"病歷寫作", q:"關於病歷錯字更正，下列做法何者正確？",
+   options:["以立可白塗改後重寫","劃單線刪除、於旁更正並簽名加註時間","整段撕除後重新黏貼","直接覆蓋塗黑即可"], answer:1},
+  {id:"K5", course:"生活型態醫學", q:"下列何者「不」屬於生活型態醫學的核心支柱？",
+   options:["健康飲食","規律運動","充足睡眠與壓力管理","增加每日工作時數"], answer:3},
+  {id:"K6", course:"針扎處置", q:"發生針扎（銳器傷）後，下列處置何者「不」恰當？",
+   options:["以肥皂與大量清水沖洗傷口","黏膜暴露時以生理食鹽水沖洗","為免麻煩隱瞞不通報、自行觀察","儘速依院內流程通報並評估暴露源"], answer:2},
+  {id:"K7", course:"針扎預防", q:"在病房預防針扎事件，下列做法何者正確？",
+   options:["針具使用後立即雙手回套針帽","使用後銳器立即丟入專用防穿刺收集盒","用過針具暫放治療車檯面再處理","徒手分離針頭與針筒"], answer:1},
+  {id:"K8", course:"病人安全", q:"執行給藥或治療前辨識病人身分，正確做法為？",
+   options:["以床號作為唯一辨識依據","至少使用兩種辨識方式（如姓名＋病歷號／出生日期）","以房號辨識即可","詢問鄰床病人代為確認"], answer:1},
+  {id:"K9", course:"品質與安全", q:"下列何者最符合「病人安全文化」的精神？",
+   options:["異常事件應隱匿以免被責難","鼓勵主動通報異常事件並從系統面檢討改善","僅追究個人疏失即可","接近錯失（near miss）不需通報"], answer:1},
+  {id:"K10", course:"公平照護", q:"關於提供公平（equitable）的醫療照護，下列敘述何者正確？",
+   options:["可依病人社經地位差別對待","不論種族、性別、宗教或經濟狀況皆應提供同等品質照護","語言不通的病人可省略告知說明","依病人外觀決定照護投入程度"], answer:1},
+  {id:"K11", course:"自殺防治", q:"自殺防治守門人「一問、二應、三轉介」中，「一問」指的是？",
+   options:["主動關懷並適當詢問對方是否有自殺意念","詢問病人的經濟狀況","僅詢問家屬意見即可","避免提及自殺以免刺激對方"], answer:0},
+  {id:"K12", course:"自殺防治", q:"關於與有自殺意念者談論自殺，下列敘述何者正確？",
+   options:["主動詢問自殺意念會增加其自殺風險","適當且開放地談論，反而有助於降低風險並提供協助","應假裝沒看到警訊","自殺都是毫無預兆的"], answer:1},
+  {id:"K13", course:"資訊系統／AI", q:"關於使用院內系統（如 A+醫師）與 AI 工具（如 ChatGPT）協助臨床作業，下列敘述何者正確？",
+   options:["可將含病人完整個資的內容直接貼入公開 AI 工具查詢","須遵守病人隱私與資安規範，且 AI 產出仍須由醫師專業判讀確認","AI 產出可不經查證直接寫入病歷","系統帳號密碼可與同學共用"], answer:1}
+];
+
+// 信心自評（課後測驗）
+const CONFIDENCE = [
+  {id:"C1", t:"我了解並能正確執行手部衛生五時機與隔離防護"},
+  {id:"C2", t:"我知道發生針扎時的正確處置與通報流程"},
+  {id:"C3", t:"我能依 SOAP 格式書寫基本病歷"},
+  {id:"C4", t:"我了解病人安全的病人辨識與通報原則"},
+  {id:"C5", t:"我認識生活型態醫學的核心概念"},
+  {id:"C6", t:"我了解自殺防治守門人的角色與做法"},
+  {id:"C7", t:"我知道如何使用院內資訊系統（含 A+醫師）協助臨床作業"},
+  {id:"C8", t:"我了解教育輔導組能提供哪些協助管道"},
+  {id:"C9", t:"整體而言，我已準備好開始實習工作"}
+];
+const CONF_LABELS = ["非常\n沒信心","沒信心","普通","有信心","非常\n有信心"];
+
+// 滿意度 — 各堂課（對應海報）
+const SESSIONS = [
+  {id:"S1", t:"安全衛生教育（針扎流程）與報到流程", lec:"人力資源部／安全衛生室／總務室"},
+  {id:"S2", t:"環境介紹／院內手機配發", lec:"教學部"},
+  {id:"S3", t:"感染管制課程（手部衛生及隔離防護）", lec:"感染管制中心　陳淑玲 感管師"},
+  {id:"S4", t:"病歷寫作", lec:"腎臟科　江銘彥 醫師"},
+  {id:"S5", t:"生活型態醫學", lec:"健康管理中心　蔡孟修 主任"},
+  {id:"S6", t:"實習醫學生相關資訊系統介紹（含 A+醫師、ChatGPT）", lec:"一般內科　黃琪雅 醫師"},
+  {id:"S7", t:"教育輔導組功能簡介", lec:"一般內科　黃琪雅 醫師"},
+  {id:"S8", t:"病房工作中如何預防針扎事件", lec:"6BI　章正俐 護理長"},
+  {id:"S9", t:"成為讓人安心的醫師：品質、安全與公平照護", lec:"品質管理部　杜漢祥 部長"},
+  {id:"S10", t:"自殺防治防護觀念", lec:"精神醫學部　林健禾 部長"}
+];
+const SAT_LABELS = ["非常\n不滿意","不滿意","普通","滿意","非常\n滿意"]; // index0=1分 ... index4=5分
+
+const OVERALL = [
+  {id:"O1", t:"整體課程內容與安排"},
+  {id:"O2", t:"課程時間長度與節奏安排"},
+  {id:"O3", t:"場地與設備（會議室、視聽設備）"},
+  {id:"O4", t:"行政服務與聯繫"},
+  {id:"O5", t:"這次職前訓練讓我對開始實習更有準備"}
+];
+const OPEN = [
+  {id:"Q1", t:"您認為今天最有幫助的課程是哪一堂？原因為何？"},
+  {id:"Q2", t:"您建議增加、加強或調整哪些內容？"},
+  {id:"Q3", t:"其他建議（時間安排、場地、行政服務等）"}
+];
+
+const INTRO = "請於今日<b>所有課程結束後</b>一次填寫完成。本問卷分兩部分：<b>第一部分為課後測驗</b>（知識與信心，用於了解訓練後的學習成效）；<b>第二部分為課程滿意度</b>回饋，將用於課程品質改善。<b>本問卷不記名、不影響個人成績</b>，填完一次送出即可。";
+
+/* ====================== 渲染 ====================== */
+const dyn = document.getElementById("dynamic");
+const introBox = document.getElementById("introBox");
+
+function el(html){const d=document.createElement("div");d.innerHTML=html.trim();return d.firstChild;}
+
+function scaleHTML(name, labels){
+  let s = `<div class="scale">`;
+  labels.forEach((lab,i)=>{
+    const val = i+1;
+    s += `<label><input type="radio" name="${name}" value="${val}">
+      <span class="pill"><span class="v">${val}</span><span class="t">${lab.replace(/\n/g,"<br>")}</span></span></label>`;
+  });
+  s += `</div>`;
+  return s;
+}
+
+function testHTML(){
+  let h = `<div class="section">
+    <div class="section-head"><span class="dot"></span><h2>知識測驗</h2></div>
+    <p class="section-note">共 ${KNOWLEDGE.length} 題單選題，請選擇最適當的答案。</p>`;
+  KNOWLEDGE.forEach((k,i)=>{
+    h += `<div class="qcard" data-q="${k.id}">
+      <span class="qtag">${k.course}</span>
+      <p class="qtext"><span class="num">${i+1}.</span>${k.q}</p>`;
+    k.options.forEach((o,j)=>{
+      h += `<label class="opt"><input type="radio" name="${k.id}" value="${j}">
+        <span class="lab">(${"ABCD"[j]}) ${o}</span></label>`;
+    });
+    h += `<div class="errmsg" data-for="${k.id}">尚未作答</div></div>`;
+  });
+  h += `</div>`;
+
+  h += `<div class="section">
+    <div class="section-head"><span class="dot"></span><h2>信心自評</h2></div>
+    <p class="section-note">請依您目前的把握程度勾選（1＝非常沒信心，5＝非常有信心）。</p>`;
+  CONFIDENCE.forEach(c=>{
+    h += `<div class="likert" data-q="${c.id}">
+      <div class="ltext">${c.t}</div>
+      ${scaleHTML(c.id, CONF_LABELS)}
+      <div class="errmsg" data-for="${c.id}">尚未作答</div></div>`;
+  });
+  h += `</div>`;
+  return h;
+}
+
+function surveyHTML(){
+  let h = `<div class="section">
+    <div class="section-head"><span class="dot"></span><h2>各堂課程滿意度</h2></div>
+    <p class="section-note">請就每堂課的「內容實用性」與「講師授課表達」勾選（1＝非常不滿意，5＝非常滿意）。未參加可選「普通」。</p>`;
+  SESSIONS.forEach((s,i)=>{
+    h += `<div class="sess" data-q="${s.id}">
+      <h3>${i+1}. ${s.t}</h3>
+      <div class="lect">${s.lec}</div>
+      <div class="twoscale">
+        <div class="likert" data-q="${s.id}_C">
+          <div class="ltext" style="font-size:.9rem">內容實用性（對實習有幫助）</div>
+          ${scaleHTML(s.id+"_C", SAT_LABELS)}
+          <div class="errmsg" data-for="${s.id}_C">尚未作答</div>
+        </div>
+        <div class="likert" data-q="${s.id}_L">
+          <div class="ltext" style="font-size:.9rem">講師授課與表達</div>
+          ${scaleHTML(s.id+"_L", SAT_LABELS)}
+          <div class="errmsg" data-for="${s.id}_L">尚未作答</div>
+        </div>
+      </div>
+    </div>`;
+  });
+  h += `</div>`;
+
+  h += `<div class="section">
+    <div class="section-head"><span class="dot"></span><h2>整體評價</h2></div>
+    <p class="section-note">（1＝非常不滿意／非常不同意，5＝非常滿意／非常同意）</p>`;
+  OVERALL.forEach(o=>{
+    h += `<div class="likert" data-q="${o.id}">
+      <div class="ltext">${o.t}</div>
+      ${scaleHTML(o.id, SAT_LABELS)}
+      <div class="errmsg" data-for="${o.id}">尚未作答</div></div>`;
+  });
+  h += `</div>`;
+
+  h += `<div class="section">
+    <div class="section-head"><span class="dot"></span><h2>開放意見</h2></div>`;
+  OPEN.forEach(q=>{
+    h += `<div class="field"><label class="q">${q.t} <span class="req">*</span></label>
+      <textarea data-open="${q.id}" placeholder="請填寫"></textarea>
+      <div class="errmsg" data-for="open_${q.id}">請填寫此題</div></div>`;
+  });
+  h += `</div>`;
+  return h;
+}
+
+function bindOpts(){
+  // MCQ 選取視覺
+  dyn.querySelectorAll(".opt input").forEach(inp=>{
+    inp.addEventListener("change",()=>{
+      const card = inp.closest(".qcard");
+      card.querySelectorAll(".opt").forEach(o=>o.classList.remove("checked"));
+      inp.closest(".opt").classList.add("checked");
+      card.querySelector(".errmsg").style.display="none";
+      card.querySelectorAll(".opt").forEach(o=>o.classList.remove("err"));
+    });
+  });
+  // Likert 清除錯誤
+  dyn.querySelectorAll(".scale input").forEach(inp=>{
+    inp.addEventListener("change",()=>{
+      const lk = inp.closest(".likert");
+      const e = lk.querySelector(".errmsg"); if(e) e.style.display="none";
+    });
+  });
+  // 簡答題清除錯誤
+  dyn.querySelectorAll("textarea[data-open]").forEach(ta=>{
+    ta.addEventListener("input",()=>{
+      const e=document.querySelector(`.errmsg[data-for="open_${ta.dataset.open}"]`);
+      if(e) e.style.display="none"; ta.classList.remove("err");
+    });
+  });
+}
+
+function partBanner(tag,title){
+  return `<div class="partbar"><span class="ptag">${tag}</span><span class="ptitle">${title}</span></div>`;
+}
+function render(){
+  introBox.innerHTML = INTRO;
+  document.getElementById("resultBox").classList.remove("show");
+  dyn.innerHTML = partBanner("第一部分","課後測驗（知識與信心）") + testHTML()
+                + partBanner("第二部分","課程滿意度回饋") + surveyHTML();
+  bindOpts();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+/* ====================== 收集 / 驗證 ====================== */
+function val(name){const c=document.querySelector(`[name="${name}"]:checked`);return c?c.value:"";}
+function showErr(forName){
+  const e=document.querySelector(`.errmsg[data-for="${forName}"]`);
+  if(e){e.style.display="block";}
+}
+function clearErrs(){document.querySelectorAll(".errmsg").forEach(e=>e.style.display="none");
+  document.querySelectorAll(".err").forEach(x=>x.classList.remove("err"));}
+
+function collect(){
+  clearErrs();
+  let ok=true, firstErr=null;
+  const school=document.getElementById("school").value;
+  const pairing=document.getElementById("pairing").value.trim();
+  if(!school){showErr("school");document.getElementById("school").classList.add("err");ok=false;firstErr=firstErr||document.getElementById("school");}
+  if(!pairing){showErr("pairing");document.getElementById("pairing").classList.add("err");ok=false;firstErr=firstErr||document.getElementById("pairing");}
+
+  const rec={模式:"課後問卷",
+             時間戳:new Date().toLocaleString("zh-TW"),學校:school,配對代碼:pairing};
+
+  // 第一部分：知識測驗＋信心自評
+  let correct=0; const review=[];
+  KNOWLEDGE.forEach(k=>{
+    const v=val(k.id); rec[k.id]=v===""?"":("ABCD"[+v]);
+    const isC = (v!=="" && +v===k.answer);
+    rec[k.id+"_對"]=(v==="")?"":(isC?1:0);
+    if(isC) correct++;
+    if(v==="") {showErr(k.id);ok=false;firstErr=firstErr||document.querySelector(`.qcard[data-q="${k.id}"]`);
+      document.querySelectorAll(`.qcard[data-q="${k.id}"] .opt`).forEach(o=>o.classList.add("err"));}
+    review.push({k,chosen:v,isC});
+  });
+  rec.知識得分=correct; rec.知識總分=KNOWLEDGE.length;
+  CONFIDENCE.forEach(c=>{
+    const v=val(c.id); rec[c.id]=v;
+    if(!v){showErr(c.id);ok=false;firstErr=firstErr||document.querySelector(`.likert[data-q="${c.id}"]`);}
+  });
+  rec.__review=review; rec.__correct=correct;
+
+  // 第二部分：滿意度
+  SESSIONS.forEach(s=>{
+    ["_C","_L"].forEach(suf=>{
+      const v=val(s.id+suf);
+      rec[s.id+suf]=v;
+      if(!v){showErr(s.id+suf);ok=false;firstErr=firstErr||document.querySelector(`.likert[data-q="${s.id+suf}"]`);}
+    });
+  });
+  OVERALL.forEach(o=>{
+    const v=val(o.id); rec[o.id]=v;
+    if(!v){showErr(o.id);ok=false;firstErr=firstErr||document.querySelector(`.likert[data-q="${o.id}"]`);}
+  });
+  OPEN.forEach(q=>{
+    const ta=document.querySelector(`[data-open="${q.id}"]`);
+    const v=(ta.value||"").trim();
+    rec["開放_"+q.id]=v.replace(/\n/g," ");
+    if(!v){showErr("open_"+q.id);ta.classList.add("err");ok=false;firstErr=firstErr||ta;}
+  });
+
+  if(!ok && firstErr){firstErr.scrollIntoView({behavior:"smooth",block:"center"});}
+  return ok?rec:null;
+}
+
+/* ====================== 結果顯示 ====================== */
+function showResult(rec){
+  const box=document.getElementById("resultBox");
+  {
+    let rev=`<div class="review">`;
+    rec.__review.forEach((r,i)=>{
+      const chosen = r.chosen===""?"未作答":`(${"ABCD"[+r.chosen]})`;
+      const ans=`(${"ABCD"[r.k.answer]}) ${r.k.options[r.k.answer]}`;
+      rev+=`<div class="ri ${r.isC?'ok':'ng'}"><span class="mark">${r.isC?'✓':'✗'}</span>
+        <span><b>${i+1}.</b> 您的作答：${chosen}　|　正解：${ans}</span></div>`;
+    });
+    rev+=`</div>`;
+    const pct=Math.round(rec.__correct/KNOWLEDGE.length*100);
+    box.innerHTML=`<div class="score-ring">${rec.__correct}<small> / ${KNOWLEDGE.length}（${pct}%）</small></div>
+      <p style="color:var(--good);margin:6px 0 2px;font-weight:700">✓ 課後測驗與滿意度問卷已送出</p>
+      <p style="color:var(--muted);margin:2px 0">課後測驗結果（知識）</p>
+      <p style="font-size:.84rem;color:#9aa9b3">感謝您的填寫！如需自行留存，可按下方按鈕下載本筆資料。</p>
+      ${rev}`;
+  }
+  box.classList.add("show");
+  box.scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+/* ====================== 匯出 ====================== */
+function flatRow(rec){
+  const r={...rec}; delete r.__review; delete r.__correct;
+  return r;
+}
+function toCSV(rec){
+  const r=flatRow(rec);
+  const keys=Object.keys(r);
+  const esc=v=>`"${String(v).replace(/"/g,'""')}"`;
+  return keys.map(esc).join(",")+"\n"+keys.map(k=>esc(r[k])).join(",");
+}
+function toTSV(rec){
+  const r=flatRow(rec);
+  const keys=Object.keys(r);
+  return keys.join("\t")+"\n"+keys.map(k=>String(r[k]).replace(/\t/g," ")).join("\t");
+}
+function download(name,text){
+  const blob=new Blob(["\uFEFF"+text],{type:"text/csv;charset=utf-8;"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;a.click();
+}
+function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"),2200);}
+
+let LAST=null;
+
+// 送出到 Google 試算表（Apps Script Web App）
+// 送出到 Google 試算表：用隱藏表單 + iframe 送出（最相容，不受 CORS／防火牆／本機檔案限制）
+function sendToSheet(rec){
+  if(!SHEET_ENDPOINT) return Promise.resolve({skipped:true});
+  return new Promise((resolve)=>{
+    const name = "ugy_sink_" + Date.now();
+    const iframe = document.createElement("iframe");
+    iframe.name = name; iframe.style.display = "none";
+    const form = document.createElement("form");
+    form.action = SHEET_ENDPOINT; form.method = "POST"; form.target = name;
+    const input = document.createElement("input");
+    input.type = "hidden"; input.name = "payload";
+    input.value = JSON.stringify(flatRow(rec));
+    form.appendChild(input);
+    document.body.appendChild(iframe);
+    document.body.appendChild(form);
+    let done = false;
+    const finish = ()=>{
+      if(done) return; done = true;
+      setTimeout(()=>{ try{ form.remove(); iframe.remove(); }catch(e){} }, 0);
+      resolve({ok:true});
+    };
+    iframe.addEventListener("load", finish);   // 送達後 iframe 載入完成
+    setTimeout(finish, 5000);                   // 後備：5 秒後視為已送出
+    form.submit();
+  });
+}
+
+document.getElementById("submitBtn").addEventListener("click",async()=>{
+  const btn=document.getElementById("submitBtn");
+  const rec=collect();
+  if(!rec){toast("尚有題目未完成，請檢查紅色標示處");return;}
+  LAST=rec; showResult(rec);
+
+  if(SHEET_ENDPOINT){
+    const orig=btn.textContent; btn.disabled=true; btn.textContent="送出中…";
+    try{
+      await sendToSheet(rec);
+      toast("✓ 已送出至 Google 試算表");
+    }catch(e){
+      toast("送出雲端失敗，請改用下方「下載 CSV」保存");
+    }finally{
+      btn.disabled=false; btn.textContent=orig;
+    }
+  }else{
+    toast("已完成計分（未設定雲端，請用下方按鈕保存資料）");
+  }
+});
+document.getElementById("csvBtn").addEventListener("click",()=>{
+  const rec=collect(); if(!rec){toast("請先完成所有必填題");return;} LAST=rec;
+  const tag=rec.模式+"_"+rec.配對代碼+"_"+Date.now();
+  download(`UGY職前訓練_${tag}.csv`, toCSV(rec));
+  toast("已下載 CSV");
+});
+document.getElementById("copyBtn").addEventListener("click",async()=>{
+  const rec=collect(); if(!rec){toast("請先完成所有必填題");return;} LAST=rec;
+  try{await navigator.clipboard.writeText(toTSV(rec));toast("已複製！可直接貼到 Google 試算表");}
+  catch(e){toast("複製失敗，請改用下載 CSV");}
+});
+
+/* init */
+render();
+</script>
+</body>
+</html>
