@@ -214,11 +214,11 @@ footer b{color:var(--muted);}
       <div class="errmsg" data-for="school">請選擇就讀學校</div>
     </div>
     <div class="field">
-      <label class="q">匿名代碼 <span class="req">*</span>
-        <span class="hint">（建議：出生月日4碼，例：0815。僅作為匿名識別之用，本問卷不記名、不影響個人成績。）</span>
+      <label class="q">姓名 <span class="req">*</span>
+        <span class="hint">（請填寫您的姓名，用於訓練成效紀錄，不影響個人成績。）</span>
       </label>
-      <input type="text" id="pairing" maxlength="8" placeholder="例：0815" inputmode="numeric">
-      <div class="errmsg" data-for="pairing">請填寫匿名代碼</div>
+      <input type="text" id="pairing" maxlength="30" placeholder="請輸入姓名">
+      <div class="errmsg" data-for="pairing">請填寫姓名</div>
     </div>
   </div>
 
@@ -325,7 +325,7 @@ const OPEN = [
   {id:"Q3", t:"其他建議（時間安排、場地、行政服務等）"}
 ];
 
-const INTRO = "請於今日<b>所有課程結束後</b>一次填寫完成。本問卷分兩部分：<b>第一部分為課後測驗</b>（知識與信心，用於了解訓練後的學習成效）；<b>第二部分為課程滿意度</b>回饋，將用於課程品質改善。<b>本問卷不記名、不影響個人成績</b>，填完一次送出即可。";
+const INTRO = "請於今日<b>所有課程結束後</b>一次填寫完成。本問卷分兩部分：<b>第一部分為課後測驗</b>（知識與信心，用於了解訓練後的學習成效）；<b>第二部分為課程滿意度</b>回饋，將用於課程品質改善。<b>本問卷僅供訓練成效分析、不影響個人成績</b>，填完一次送出即可。";
 
 /* ====================== 渲染 ====================== */
 const dyn = document.getElementById("dynamic");
