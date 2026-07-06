@@ -189,9 +189,9 @@ footer b{color:var(--muted);}
     <h1>實習醫學生職前訓練 · 課後問卷</h1>
     <div class="sub">115學年度 UGY 職前訓練 — 課後測驗與滿意度問卷</div>
     <div class="meta">
-      <span>📅 <b>115/06/01（一）</b></span>
+      <span>📅 <b>115/07/06（一）</b></span>
       <span>📍 <b>教學大樓 B1 教-2 會議室</b></span>
-      <span>👥 <b>中山醫25 · 成大2 · 國防2</b></span>
+      <span>👥 <b>中山後醫6 · 陽明交大4 · 高醫4</b></span>
     </div>
   </div>
 </header>
@@ -204,14 +204,24 @@ footer b{color:var(--muted);}
   <div class="section" id="baseBox">
     <div class="section-head"><span class="dot"></span><h2>基本資料</h2></div>
     <div class="field">
+      <label class="q">訓練日期 <span class="req">*</span></label>
+      <input type="text" id="courseDate" maxlength="15" placeholder="例：115/07/06">
+      <div class="errmsg" data-for="courseDate">請填寫訓練日期</div>
+    </div>
+    <div class="field">
       <label class="q">就讀學校 <span class="req">*</span></label>
-      <select id="school">
+      <input type="text" id="school" maxlength="30" placeholder="例：中山後醫、陽明交大、高醫">
+      <div class="errmsg" data-for="school">請填寫就讀學校</div>
+    </div>
+    <div class="field">
+      <label class="q">年級 <span class="req">*</span></label>
+      <select id="grade">
         <option value="">— 請選擇 —</option>
-        <option>中山醫學大學</option>
-        <option>成功大學</option>
-        <option>國防醫學大學</option>
+        <option>六年級</option>
+        <option>後醫學系三年級</option>
+        <option>後醫學系四年級</option>
       </select>
-      <div class="errmsg" data-for="school">請選擇就讀學校</div>
+      <div class="errmsg" data-for="grade">請選擇年級</div>
     </div>
     <div class="field">
       <label class="q">姓名 <span class="req">*</span>
@@ -297,18 +307,16 @@ const CONFIDENCE = [
 ];
 const CONF_LABELS = ["非常\n沒信心","沒信心","普通","有信心","非常\n有信心"];
 
-// 滿意度 — 各堂課（對應海報）
+// 滿意度 — 各堂課（對應 7/6 課表）
 const SESSIONS = [
   {id:"S1", t:"安全衛生教育（針扎流程）與報到流程", lec:"人力資源部／安全衛生室／總務室"},
   {id:"S2", t:"環境介紹／院內手機配發", lec:"教學部"},
-  {id:"S3", t:"感染管制課程（手部衛生及隔離防護）", lec:"感染管制中心　陳淑玲 感管師"},
   {id:"S4", t:"病歷寫作", lec:"腎臟科　江銘彥 醫師"},
-  {id:"S5", t:"生活型態醫學", lec:"健康管理中心　蔡孟修 主任"},
+  {id:"S5", t:"生活型態醫學", lec:"家庭醫學部　葉亭妤 醫師"},
   {id:"S6", t:"實習醫學生相關資訊系統介紹（含 A+醫師、ChatGPT）", lec:"一般內科　黃琪雅 醫師"},
   {id:"S7", t:"教育輔導組功能簡介", lec:"一般內科　黃琪雅 醫師"},
-  {id:"S8", t:"病房工作中如何預防針扎事件", lec:"6BI　章正俐 護理長"},
-  {id:"S9", t:"成為讓人安心的醫師：品質、安全與公平照護", lec:"品質管理部　杜漢祥 部長"},
-  {id:"S10", t:"自殺防治防護觀念", lec:"精神醫學部　林健禾 部長"}
+  {id:"S8", t:"病房工作中如何預防針扎事件", lec:"ER　吳貞鋆 高階護理師"},
+  {id:"S9", t:"成為讓人安心的醫師：品質、安全與公平照護", lec:"品質管理部　杜漢祥 部長"}
 ];
 const SAT_LABELS = ["非常\n不滿意","不滿意","普通","滿意","非常\n滿意"]; // index0=1分 ... index4=5分
 
@@ -470,13 +478,18 @@ function clearErrs(){document.querySelectorAll(".errmsg").forEach(e=>e.style.dis
 function collect(){
   clearErrs();
   let ok=true, firstErr=null;
-  const school=document.getElementById("school").value;
+  const courseDate=document.getElementById("courseDate").value.trim();
+  const school=document.getElementById("school").value.trim();
+  const grade=document.getElementById("grade").value;
   const pairing=document.getElementById("pairing").value.trim();
+  if(!courseDate){showErr("courseDate");document.getElementById("courseDate").classList.add("err");ok=false;firstErr=firstErr||document.getElementById("courseDate");}
   if(!school){showErr("school");document.getElementById("school").classList.add("err");ok=false;firstErr=firstErr||document.getElementById("school");}
+  if(!grade){showErr("grade");document.getElementById("grade").classList.add("err");ok=false;firstErr=firstErr||document.getElementById("grade");}
   if(!pairing){showErr("pairing");document.getElementById("pairing").classList.add("err");ok=false;firstErr=firstErr||document.getElementById("pairing");}
 
   const rec={模式:"課後問卷",
-             時間戳:new Date().toLocaleString("zh-TW"),學校:school,配對代碼:pairing};
+             時間戳:new Date().toLocaleString("zh-TW"),
+             日期:courseDate,學校:school,年級:grade,姓名:pairing};
 
   // 第一部分：知識測驗＋信心自評
   let correct=0; const review=[];
@@ -617,7 +630,7 @@ document.getElementById("submitBtn").addEventListener("click",async()=>{
 });
 document.getElementById("csvBtn").addEventListener("click",()=>{
   const rec=collect(); if(!rec){toast("請先完成所有必填題");return;} LAST=rec;
-  const tag=rec.模式+"_"+rec.配對代碼+"_"+Date.now();
+  const tag=rec.模式+"_"+rec.姓名+"_"+Date.now();
   download(`UGY職前訓練_${tag}.csv`, toCSV(rec));
   toast("已下載 CSV");
 });
